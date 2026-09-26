@@ -313,7 +313,7 @@ else
   host_name="${host_name%-}"
   host_name="${host_name:-server}"
 
-  prompt_required BLOG_BASE_URL "博客后端 HTTPS 地址（可包含部署路径）"
+  prompt_required BLOG_BASE_URL "博客后端 HTTPS 根地址（不含 /api 等路径）"
   prompt_required MONITOR_NODE_ID "监控节点 ID" "monitor-${host_name}"
   prompt_required MONITOR_HMAC_KEY_ID "HMAC key ID" "monitor-$(date -u +%Y-%m)"
   prompt_required MONITOR_HOST_PORT "仅本机监听的健康检查端口" "8080"
@@ -391,6 +391,6 @@ printf '\n排查命令：\n'
 printf '  cd %q\n' "${PROJECT_ROOT}"
 printf '  docker compose --env-file .env logs --tail 100\n'
 printf '\n请确认博客后端已加载 .backend-env 中的变量，且以下接口可通过 BLOG_BASE_URL 访问：\n'
-printf '  GET  /internal/friend-link-monitor/catalog\n'
-printf '  POST /internal/friend-link-monitor/status-batch\n'
+printf '  GET  /internal/blogroll-monitor/catalog\n'
+printf '  POST /internal/blogroll-monitor/status-batch\n'
 exit 1

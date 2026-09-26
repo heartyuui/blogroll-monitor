@@ -28,12 +28,12 @@ func TestClientSignsCatalogAndStatusRequests(t *testing.T) {
 		verifyRequest(t, request, body, secret)
 		response.Header().Set("Content-Type", "application/json")
 		switch request.URL.Path {
-		case "/internal/friend-link-monitor/catalog":
+		case "/internal/blogroll-monitor/catalog":
 			_ = json.NewEncoder(response).Encode(CatalogPage{
 				SchemaVersion: 1, SyncID: "sync-1", Complete: true,
 				Items: []model.CatalogItem{{ID: "friend-1", URL: "https://example.com/", MonitorRevision: 1, MonitorEnabled: true}},
 			})
-		case "/internal/friend-link-monitor/status-batch":
+		case "/internal/blogroll-monitor/status-batch":
 			_ = json.NewEncoder(response).Encode(map[string]any{
 				"schemaVersion": 1,
 				"results":       []StatusResult{{EventID: "00000000-0000-4000-8000-000000000001", Accepted: true}},

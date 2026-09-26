@@ -29,12 +29,12 @@ func TestServiceSyncsChecksPersistsAndReturnsStatus(t *testing.T) {
 	blog := httptest.NewServer(http.HandlerFunc(func(response http.ResponseWriter, request *http.Request) {
 		response.Header().Set("Content-Type", "application/json")
 		switch request.URL.Path {
-		case "/internal/friend-link-monitor/catalog":
+		case "/internal/blogroll-monitor/catalog":
 			_ = json.NewEncoder(response).Encode(syncclient.CatalogPage{
 				SchemaVersion: 1, SyncID: "integration-sync", Complete: true,
 				Items: []model.CatalogItem{{ID: "friend-1", URL: target.URL, MonitorRevision: 1, MonitorEnabled: true}},
 			})
-		case "/internal/friend-link-monitor/status-batch":
+		case "/internal/blogroll-monitor/status-batch":
 			var payload struct {
 				Events []model.StatusEvent `json:"events"`
 			}

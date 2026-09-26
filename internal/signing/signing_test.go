@@ -11,12 +11,12 @@ import (
 )
 
 func TestCanonicalTargetSortsAndEncodesLikeBackend(t *testing.T) {
-	target, err := url.Parse("https://example.com/internal/friend-link-monitor/catalog?z=2&a=hello+world&a=%21%2A")
+	target, err := url.Parse("https://example.com/internal/blogroll-monitor/catalog?z=2&a=hello+world&a=%21%2A")
 	if err != nil {
 		t.Fatal(err)
 	}
 	got := CanonicalTarget(target)
-	want := "/internal/friend-link-monitor/catalog?a=%21%2A&a=hello%20world&z=2"
+	want := "/internal/blogroll-monitor/catalog?a=%21%2A&a=hello%20world&z=2"
 	if got != want {
 		t.Fatalf("canonical target = %q, want %q", got, want)
 	}
@@ -24,7 +24,7 @@ func TestCanonicalTargetSortsAndEncodesLikeBackend(t *testing.T) {
 
 func TestHeadersSignBodyAndTarget(t *testing.T) {
 	secret := []byte("01234567890123456789012345678901")
-	target, _ := url.Parse("https://example.com/internal/friend-link-monitor/status-batch")
+	target, _ := url.Parse("https://example.com/internal/blogroll-monitor/status-batch")
 	body := []byte(`{"nodeId":"monitor-1"}`)
 	now := time.Unix(1_700_000_000, 0)
 	headers, err := (Signer{KeyID: "key-1", Secret: secret}).Headers("POST", target, body, now)

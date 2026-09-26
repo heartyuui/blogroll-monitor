@@ -88,7 +88,7 @@ func (c *Client) Close() {
 }
 
 func (c *Client) Catalog(ctx context.Context, cursor string) (CatalogPage, error) {
-	target := c.resolve("/internal/friend-link-monitor/catalog")
+	target := c.resolve("/internal/blogroll-monitor/catalog")
 	query := target.Query()
 	query.Set("limit", "200")
 	if cursor != "" {
@@ -114,7 +114,7 @@ func (c *Client) SendStatus(ctx context.Context, events []model.StatusEvent) ([]
 		return nil, err
 	}
 	var response statusResponse
-	if err := c.doJSON(ctx, http.MethodPost, c.resolve("/internal/friend-link-monitor/status-batch"), body, &response); err != nil {
+	if err := c.doJSON(ctx, http.MethodPost, c.resolve("/internal/blogroll-monitor/status-batch"), body, &response); err != nil {
 		return nil, err
 	}
 	if response.SchemaVersion != 1 || len(response.Results) != len(events) {
