@@ -1,0 +1,33 @@
+services:
+  friend-link-monitor:
+    build:
+      context: .
+    image: blogroll-monitor:local
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:${MONITOR_HOST_PORT:-8080}:8080"
+    volumes:
+      - friend-link-monitor-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://127.0.0.1:8080/health/ready"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 256M
+
+volumes:
+  friend-link-monitor-data:

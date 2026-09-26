@@ -1,0 +1,16 @@
+/.env
+/.backend-env
+/.env.tmp.*
+/.backend-env.tmp.*
+/.env.backup.*
+/.backend-env.backup.*
+/bin/
+/friend-link-monitor
+/friend-link-monitor.exe
+/coverage/
+/.cache/
+/data/
+*.db
+*.db-shm
+*.db-wal
+*.log

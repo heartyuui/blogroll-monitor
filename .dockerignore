@@ -1,0 +1,15 @@
+.git
+.cache
+.env
+.backend-env
+.env.tmp.*
+.backend-env.tmp.*
+.env.backup.*
+.backend-env.backup.*
+bin
+coverage
+data
+*.db
+*.db-shm
+*.db-wal
+*.log
